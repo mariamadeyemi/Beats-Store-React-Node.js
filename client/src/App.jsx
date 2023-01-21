@@ -1,11 +1,7 @@
 import './App.css'
-import Navbar from './components/Nav';
-import Hero from './components/Hero';
-import Featured from './components/Featured';
-import Footer from './components/Footer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './pages/Layout';
-import Home from './pages/shop-pages/Home';
+import Home from './pages/Home';
 import About from './pages/About';
 import Blog from './pages/blog-pages/Blog_home';
 import Products from './pages/shop-pages/Products';
