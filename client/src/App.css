@@ -18,6 +18,8 @@ html, body{
   background: var(--very-light-gray);
 }
 
+
+
 .nav-style{
   background-color: var(--white) !important;
 }
@@ -167,7 +169,34 @@ cursor: pointer;
 
 footer{
   padding: 2em;
-  background-color: var(--dark-blue);
   color: var(--white);
+  background-color: var(--dark-blue);
+  /* background-image: url("../src/assets/circle-scatter-haikei.svg");
+  background-repeat: no-repeat;
+  background-size: cover; */
 }
 
+.about{
+  max-width: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about h1{
+  color: var(--dark-blue);
+  font-weight: 700;
+}
+
+.about p{
+  color: var(--grayish-blue);
+  font-size: 16px;
+}
+
+/* .banner{
+  background-image: url("../src/assets/circle-scatter-haikei.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+} */

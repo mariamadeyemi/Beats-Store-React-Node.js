@@ -1,0 +1,44 @@
+.product-img{
+    padding: 2em;
+    height: 300px;
+    object-fit: cover;
+}
+
+.products{
+    background-color: hsl(220, 16%, 96%);
+}
+
+.card-container{
+  position: relative;
+}
+
+.overlay{
+    position: absolute;
+    display: block;
+    top: 40%;
+    left: 50%;
+    transition: .5s ease;
+  background: rgb(255,255,255);
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(49,211,92,1) 0%, rgba(43,183,218,1) 100%);
+  color: var(--dark-blue);
+  font-size: 1.2em;
+  padding: 1px 5px;
+  /* border: none; */
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
+.body{
+    padding-left: 2em;
+}
+
+.title{
+    color: var(--dark-blue);
+    font-weight: 400;
+}
+
+.text{
+    font-size: 15px;
+    color: var(--grayish-blue);
+}
