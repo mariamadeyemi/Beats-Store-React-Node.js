@@ -31,7 +31,7 @@ function Contact() {
 
       <Form.Group as={Row} className="mb-3">
         <Col sm={{ span: 10, offset: 2 }}>
-          <Button variant="info" type="submit">Sign in</Button>
+          <Button variant="info" type="submit" className='contact-btn'>Send Message</Button>
         </Col>
       </Form.Group>
     </Form>           

@@ -11,6 +11,7 @@ import { FaPause, FaPlay } from 'react-icons/fa';
 import Card from 'react-bootstrap/Card';
 import '../../products.css';
 import { useState } from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
 
 
 function Products() {
@@ -38,24 +39,30 @@ function Products() {
         </Col>
     </Row>
 
-    <Row xs={1} md={3} className="g-4 pt-3 pb-3">
-      {Array.from({ length: 4 }).map((_, idx) => (
-        <Col className='card-container'>
+    <Row xs={2} md={3} className="g-4 pt-3 pb-3">
+      {/* {Array.from({ length: 4 }).map((_, idx) => ( */}
+      <LinkContainer to="/product">
+      <Col className='card-container'>
           <Card>
             <Card.Img variant="top" src={imageFour} className="product-img" />
             <Card.ImgOverlay>
             <p className="overlay" onClick={handleClick}>{play}</p>
             </Card.ImgOverlay>
             <Card.Body className="body">
-              <Card.Title className="title">Burna's Type Beat</Card.Title>
+              <Card.Title className="title">
+                Burna's Type Beat
+                </Card.Title>
               <Card.Text className="text">
                 $100.00
               </Card.Text>
-              <Button variant='outline-info'>Add to Cart</Button>
+        
+             
             </Card.Body>
           </Card>
         </Col>
-      ))}
+      </LinkContainer>
+        
+      {/* ))} */}
     </Row>
   
 </Container>

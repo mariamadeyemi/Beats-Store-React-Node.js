@@ -8,6 +8,8 @@ import Products from './pages/shop-pages/Products';
 import Cart from './pages/shop-pages/Cart';
 import Contact from './pages/Contact';
 import Nopage from './pages/Nopage';
+import Product from './pages/shop-pages/Product';
+import Page from './pages/blog-pages/Page';
 
 
 
@@ -20,7 +22,9 @@ function App() {
       <Route index element={<Home />}/>
       <Route path='about' element={<About />}/>
       <Route path='blog-home' element={<Blog />}/>
+      <Route path='post' element={<Page />}/>
       <Route path='products' element={<Products />}/>
+      <Route path='product' element={<Product />}/>
       <Route path='cart' element={<Cart />}/>
       <Route path='contact' element={<Contact />}/>
       <Route path='*' element={<Nopage />}/>
