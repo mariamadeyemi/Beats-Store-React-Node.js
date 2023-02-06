@@ -10,6 +10,7 @@ import Contact from './pages/Contact';
 import Nopage from './pages/Nopage';
 import Product from './pages/shop-pages/Product';
 import Page from './pages/blog-pages/Page';
+import CreatePost from './pages/blog-pages/CreatePost';
 
 
 
@@ -23,6 +24,7 @@ function App() {
       <Route path='about' element={<About />}/>
       <Route path='blog-home' element={<Blog />}/>
       <Route path='post' element={<Page />}/>
+      <Route path='write-post' element={<CreatePost />}/>
       <Route path='products' element={<Products />}/>
       <Route path='product' element={<Product />}/>
       <Route path='cart' element={<Cart />}/>

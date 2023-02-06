@@ -404,5 +404,22 @@ cursor: pointer;
  .summary{
   margin-top: 2em;
  }
+
+ .item-2{
+  margin-top: 2em;
+ }
   
 }
+
+/* create post */
+
+.quill-container{
+  height: 300px;
+  overflow: scroll;
+}
+
+.quill{
+  height: 100%;
+  border: none;
+}
+
