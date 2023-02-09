@@ -416,6 +416,7 @@ cursor: pointer;
 .quill-container{
   height: 300px;
   overflow: scroll;
+  border: 1px solid var(--grayish-blue);
 }
 
 .quill{

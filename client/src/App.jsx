@@ -11,6 +11,7 @@ import Nopage from './pages/Nopage';
 import Product from './pages/shop-pages/Product';
 import Page from './pages/blog-pages/Page';
 import CreatePost from './pages/blog-pages/CreatePost';
+import CreateProduct from './pages/shop-pages/CreateProduct';
 
 
 
@@ -27,6 +28,7 @@ function App() {
       <Route path='write-post' element={<CreatePost />}/>
       <Route path='products' element={<Products />}/>
       <Route path='product' element={<Product />}/>
+      <Route path='create-product' element={<CreateProduct />}/>
       <Route path='cart' element={<Cart />}/>
       <Route path='contact' element={<Contact />}/>
       <Route path='*' element={<Nopage />}/>
