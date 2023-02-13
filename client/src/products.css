@@ -37,8 +37,7 @@
     color: var(--dark-blue);
     font-weight: 400;
     cursor: pointer;
-    list-style-type: none;
-
+    text-decoration: none;
 }
 
 .text{

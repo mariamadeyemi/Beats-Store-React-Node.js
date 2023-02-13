@@ -3,29 +3,46 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/esm/Col';
-import imageThree from '../../assets/store-img/guitarist-and-pianist.jpg'
 import imageFour from '../../assets/store-img/in-da-club.jpg'
-import imageSeven from '../../assets/store-img/black-girl-holding-guitar.jpg'
 import { Link } from 'react-router-dom';
 import { FaPause, FaPlay } from 'react-icons/fa';
-import Card from 'react-bootstrap/Card';
+import Dropdown from 'react-bootstrap/Dropdown';
 import '../../products.css';
 import { useState } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
+import axios from "axios";
 
 
 function Products() {
-                const [play, setPlay] = useState(<FaPlay />)
-                const [playState, setPlayState] = useState(false)
+                
 
-                const handleClick = ()=>{
-                    setPlayState(!playState)
-                    playState ? setPlay(<FaPause />) : setPlay(<FaPlay />)
-                }
     return ( 
         <section className="products">
 <Container>
     <Row>
+
+      <Col md={5} className="category mt-3">
+      <Dropdown>
+      <Dropdown.Toggle variant="info" id="dropdown-basic" className='cat-btn'>
+        Categories
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <LinkContainer to="/product">
+        <Dropdown.Item>Afro</Dropdown.Item>
+        </LinkContainer>
+        
+        <LinkContainer to="/product">
+        <Dropdown.Item>Amapiano</Dropdown.Item>
+        </LinkContainer>
+
+        <LinkContainer to="/product">
+        <Dropdown.Item>RnB</Dropdown.Item>
+        </LinkContainer>
+      </Dropdown.Menu>
+    </Dropdown>
+      </Col>
+
         <Col md={5}>
  <Form className="d-flex mt-3">
             <Form.Control
@@ -39,32 +56,31 @@ function Products() {
         </Col>
     </Row>
 
-    <Row xs={2} md={3} className="g-4 pt-3 pb-3">
-      {/* {Array.from({ length: 4 }).map((_, idx) => ( */}
-      <LinkContainer to="/product">
-      <Col className='card-container'>
-          <Card>
-            <Card.Img variant="top" src={imageFour} className="product-img" />
-            <Card.ImgOverlay>
-            <p className="overlay" onClick={handleClick}>{play}</p>
-            </Card.ImgOverlay>
-            <Card.Body className="body">
-              <Card.Title className="title">
-                Burna's Type Beat
-                </Card.Title>
-              <Card.Text className="text">
-                $100.00
-              </Card.Text>
-        
-             
-            </Card.Body>
-          </Card>
+    <Row className="g-4 pt-3 pb-3">
+      
+      <Col lg={3} className='card-container'>
+
+      <img src={imageFour} alt="" className='img-fluid rounded mb-3'/>
+                <p className="overlay"><FaPlay /></p>
+                <audio src="#"></audio>
+                    <p className="title"><Link to="/product">Cool Afro</Link></p>
+                     <p className="text">$100</p>
+
         </Col>
-      </LinkContainer>
-        
-      {/* ))} */}
+
+        <Col lg={3} className='card-container'>
+
+      <img src={imageFour} alt="" className='img-fluid rounded mb-3'/>
+                <p className="overlay"><FaPlay /></p>
+                    <p className="title"><Link to="/product">Cool Afro</Link></p>
+                     <p className="text">$100</p>
+
+        </Col>
+
+      
     </Row>
   
+
 </Container>
 
 

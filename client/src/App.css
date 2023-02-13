@@ -424,3 +424,15 @@ cursor: pointer;
   border: none;
 }
 
+.cat-btn{
+  background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(49,211,92,1) 0%, rgba(43,183,218,1) 100%);
+   border: none;
+   color: var(--white);
+}
+
+.cat-btn:hover{
+  background: rgb(255,255,255);
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(43,183,218,1) 0%, rgba(49,211,92,1) 100%);
+  color: var(--white);
+}

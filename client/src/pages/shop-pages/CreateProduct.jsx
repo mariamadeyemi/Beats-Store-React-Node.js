@@ -4,6 +4,7 @@ import Row from "react-bootstrap/esm/Row";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import axios from "axios";
 
 function CreateProduct() {
@@ -11,21 +12,18 @@ function CreateProduct() {
     const [image, setImage] = useState(null)
     const [audio, setAudio] = useState(null)
 
-    console.log(input)
+    const navigate = useNavigate()
+
+
 
    const upload = async()=>{
     try{
-//  let formData = new FormData
-//     formData.append("image", image)
-//     formData.append("audio", audio)
-//     console.log(image, audio)
-        await axios.post("/api/addProduct", {
-            name: input.name,
-            audio_type: input.audio_type,
-            price: input.price,
-            image,
-            audio
-        })
+        let formData = new FormData()
+    formData.append("image", image)
+    formData.append("audio", audio)
+ 
+    const res = await axios.post("/api/upload", formData)
+    return res.data
 
     }catch(err){
         console.log(err)
@@ -40,7 +38,22 @@ function CreateProduct() {
 
      const handleSubmit = async(e)=>{
         e.preventDefault();
-       await upload()        
+     let fileurl = await upload()
+
+        try{
+            await axios.post("/api/addProduct", {
+                name: input.name,
+                audio_type: input.audio_type,
+                price: input.price,
+                image: fileurl.image,
+                audio: fileurl.audio
+ })
+      
+        }catch(err){
+            console.log(err)
+        }
+
+        navigate("/")
     }
    
 

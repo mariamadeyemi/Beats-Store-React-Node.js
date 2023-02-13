@@ -41,6 +41,16 @@ class Model {
     return results;
   }
 
+  static async fetch(){
+    let result = [];
+    let sql = `SELECT * FROM ${this.tablename}`
+    let [rows] = await conn.execute(sql);
+    for(const row of rows){
+        result.push(new this(row)) //this- the cuurent child class that is calling this function from the parent
+    }
+    return result
+}
+
   static async find(filters = []) {
     let result = [];
     let sql = `SELECT * from ${this.tableName}`;
