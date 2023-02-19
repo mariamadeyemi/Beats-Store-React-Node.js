@@ -5,9 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import App from './App'
 import './index.css'
+import { ProductContextProvider } from './context/productContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <ProductContextProvider>
+    <App />  
+    </ProductContextProvider>
+    </React.StrictMode>,
 )

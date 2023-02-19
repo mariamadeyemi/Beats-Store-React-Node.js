@@ -6,13 +6,18 @@ import Col from 'react-bootstrap/esm/Col';
 import { FaPause, FaPlay, FaTimes } from 'react-icons/fa';
 import Button from 'react-bootstrap/esm/Button';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { ProductContext } from '../../context/productContext';
 
 function Cart() {
+    const {cart} = useContext(ProductContext)
+
     return ( 
         <section className="cart">
             <Container>
 
                 <Row className='align-items-start'>
+                    
                 <Col md={7}>
     <h1 className="cart-h1">Cart Review</h1> 
 
@@ -22,21 +27,31 @@ function Cart() {
 
   <div className="items-container">
     <div className="item">
-        <p className='item-head'>Item</p>
-        <div className="item-des">
+        <p className="item-head">Item</p>
+        <p className="price-head">Price</p>
+    </div>
+    {cart.map((item)=>{
+                        return     <div className="description">
+      <div className="item-des">
 <FaPlay className='item-play'/>
-        <p>
-        <span>Burna type beat</span>
-        <span>Track (MP3, WAV, and TRACK STEMS)</span>
-        </p>
-        </div>
-        
+<p>
+<span>{item.name}</span>
+<span>{item.audio_type}</span>    
+</p>
+  </div>  
+  <div className="price-desc">
+  <p className='price-amt'>{`$${item.price}`}</p>
+    </div> 
     </div>
-    <div className="price">
-        <p className='price-head'>Price</p>
-        <p className='price-amt'>$100.00</p>
-    </div>
+
+                    })}
+
+   
   </div>
+
+  
+
+  
         </Col>  
 
         <Col md={5}>

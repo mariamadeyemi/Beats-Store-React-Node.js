@@ -4,8 +4,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {LinkContainer} from 'react-router-bootstrap'
 import logo from "../../assets/logo-1.png" 
+import { useContext } from "react";
+import { ProductContext } from "../../context/productContext";
 
 function MainNav() {
+  const {total} = useContext(ProductContext)
   return (
     <Navbar expand="lg" sticky="top" className="nav-style">
       <Container>
@@ -32,8 +35,12 @@ function MainNav() {
              <Nav.Link>Contact</Nav.Link>
             </LinkContainer>
 
+            <LinkContainer to="/sign-up">
+             <Nav.Link>Sign Up</Nav.Link>
+            </LinkContainer>
+
             <LinkContainer to="/cart">
-             <Nav.Link><FaShoppingCart /> Cart <span>1</span></Nav.Link>
+             <Nav.Link><FaShoppingCart /> Cart <span>{total}</span></Nav.Link>
             </LinkContainer>
            
           </Nav>

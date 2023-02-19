@@ -22,6 +22,10 @@ button, a{
   cursor: pointer;
 }
 
+a{
+  text-decoration: none;
+}
+
 
 
 .logo-img{
@@ -268,7 +272,14 @@ footer{
   padding-bottom: 0.7em;
 }
 
-.items-container{
+.item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.description{
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -436,3 +447,75 @@ cursor: pointer;
   background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(43,183,218,1) 0%, rgba(49,211,92,1) 100%);
   color: var(--white);
 }
+
+/* product page */
+
+.prod-img{
+  height: 200px;
+}
+
+.login-btn{
+  width: 100%;
+  background: rgb(255,255,255);
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(43,183,218,1) 0%, rgba(49,211,92,1) 100%);
+  color: var(--white);
+  border: none;
+}
+
+.login-btn:hover{
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(49,211,92,1) 0%, rgba(43,183,218,1) 100%);
+}
+
+.create-btn{
+  width: 100%;
+  background-color: #bebebe;
+  color: var(--dark-blue);
+  border: none;
+}
+
+.create-btn:hover{
+  background-color: var(--dark-blue);
+  color: var(--white);
+}
+
+.forgot{
+  font-size: 14px;
+  color: var(--grayish-blue);
+}
+
+.no-acc{
+  color: var(--dark-blue);
+  font-weight: 400;
+}
+
+.sign-p{
+  color: var(--dark-blue);
+  font-weight: 700;
+}
+
+.register-h3{
+  color: var(--dark-blue);
+  font-weight: 700;
+}
+
+.register-p{
+  color: var(--dark-blue);
+  font-weight: 700;
+}
+
+.signup-btn{
+ background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(49,211,92,1) 0%, rgba(43,183,218,1) 100%);
+   border: none;
+   color: var(--white); 
+}
+
+.signup-btn:hover{
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(43,183,218,1) 0%, rgba(49,211,92,1) 100%);
+}
+
+.already{
+  color: var(--grayish-blue);
+  font-size: 15px;
+}
+

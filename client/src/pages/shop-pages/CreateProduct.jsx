@@ -4,18 +4,19 @@ import Row from "react-bootstrap/esm/Row";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import axios from "axios";
 
 function CreateProduct() {
+
+     const state = useLocation().state
+    const navigate = useNavigate()
     const [input, setInput] = useState({})
     const [image, setImage] = useState(null)
     const [audio, setAudio] = useState(null)
-
-    const navigate = useNavigate()
-
-
-
+    const [cat, setCat] = useState(state?.cat || "");
+    
+   
    const upload = async()=>{
     try{
         let formData = new FormData()
@@ -36,24 +37,30 @@ function CreateProduct() {
         setInput(values=>({...values, [name]: value}))
     }
 
+    console.log(input)
+    console.log(cat)
+
+
      const handleSubmit = async(e)=>{
         e.preventDefault();
-     let fileurl = await upload()
-
-        try{
-            await axios.post("/api/addProduct", {
+            let fileurl = await upload()
+            try {
+            if(!state){
+             await axios.post("/api/addProduct", {
                 name: input.name,
                 audio_type: input.audio_type,
                 price: input.price,
+                product_cat: cat,
                 image: fileurl.image,
                 audio: fileurl.audio
- })
-      
-        }catch(err){
-            console.log(err)
-        }
-
-        navigate("/")
+ })     
+            }
+          
+       navigate("/")    
+            } catch (error) {
+                console.log(error)
+            }
+            
     }
    
 
@@ -75,6 +82,43 @@ function CreateProduct() {
 
                     <Form.Group className="mb-3">
                         <Form.Control type="number" placeholder="Price" name="price" onChange={handleChange}/>
+
+        <div className="radio mt-3 mb-3">
+        <Form.Check
+            inline
+            label="Afro"
+            name="product_cat"
+            type="checkbox"
+            checked={cat === "afro"}
+            value="afro"
+            id="inline-checkbox-Afro"
+            onChange={(e) => setCat(e.target.value)}
+          />
+
+<Form.Check
+            inline
+            label="Amapiano"
+            name="product_cat"
+            checked={cat === "amapiano"}
+            type="checkbox"
+            value="amapiano"
+            id="inline-checkbox-Amapiano"
+            onChange={(e) => setCat(e.target.value)}
+          />
+
+<Form.Check
+            inline
+            label="Rnb"
+            name="product_cat"
+            checked={cat === "rnb"}
+            type="checkbox"
+            value="rnb"
+            id="inline-checkbox-Rnb"
+            onChange={(e) => setCat(e.target.value)}
+/>
+
+        </div>
+
                     </Form.Group> 
 
                     <Form.Group className="mb-3">

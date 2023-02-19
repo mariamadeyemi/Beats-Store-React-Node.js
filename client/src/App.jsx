@@ -12,6 +12,8 @@ import Product from './pages/shop-pages/Product';
 import Page from './pages/blog-pages/Page';
 import CreatePost from './pages/blog-pages/CreatePost';
 import CreateProduct from './pages/shop-pages/CreateProduct';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 
 
@@ -27,9 +29,11 @@ function App() {
       <Route path='post' element={<Page />}/>
       <Route path='write-post' element={<CreatePost />}/>
       <Route path='products' element={<Products />}/>
-      <Route path='product' element={<Product />}/>
+      <Route path='product/:id' element={<Product />}/>
       <Route path='create-product' element={<CreateProduct />}/>
       <Route path='cart' element={<Cart />}/>
+      <Route path='login' element={<Login />}/>
+      <Route path='sign-up' element={<Register />}/>
       <Route path='contact' element={<Contact />}/>
       <Route path='*' element={<Nopage />}/>
     </Route>

@@ -3,19 +3,31 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/esm/Col';
-import imageFour from '../../assets/store-img/in-da-club.jpg'
-import { Link } from 'react-router-dom';
-import { FaPause, FaPlay } from 'react-icons/fa';
+import { Link, useLocation } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import '../../products.css';
-import { useState } from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
+import { useEffect, useState } from 'react';
 import axios from "axios";
+import SingleProduct from '../../components/store_component/singleProduct';
 
 
 function Products() {
-                
+  const [products, setProducts] = useState([])
 
+  const cat = useLocation().search
+
+  useEffect(() => {
+    const fetchData = async ()=>{
+    try {
+      const res = await axios.get(`/api/products${cat}`)
+      setProducts(res.data);
+    } catch (error) {
+      console.log(error)
+    }  
+    }
+  fetchData()  
+  }, [cat])
+  console.log(cat)
     return ( 
         <section className="products">
 <Container>
@@ -28,17 +40,17 @@ function Products() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <LinkContainer to="/product">
+        <Link to="/products?cat=afro">
         <Dropdown.Item>Afro</Dropdown.Item>
-        </LinkContainer>
+        </Link>
         
-        <LinkContainer to="/product">
+        <Link to="/products?cat=amapiano">
         <Dropdown.Item>Amapiano</Dropdown.Item>
-        </LinkContainer>
+        </Link>
 
-        <LinkContainer to="/product">
+        <Link to="/products?cat=rnb">
         <Dropdown.Item>RnB</Dropdown.Item>
-        </LinkContainer>
+        </Link>
       </Dropdown.Menu>
     </Dropdown>
       </Col>
@@ -57,26 +69,22 @@ function Products() {
     </Row>
 
     <Row className="g-4 pt-3 pb-3">
+
+      {
+        products.map((product)=>{
+          return <SingleProduct key={product.id} {...product} />
+
+          // return <Col lg={3} className='card-container' key={product.id}>
+          // <img src={`../../../src/uploads/${product.image}`} alt="" className='img-fluid rounded mb-3'/>
+          //            <p className="overlay"><FaPlay /></p>
+          //            <audio src="#"></audio>
+          //                <p className="title"><Link to={`/product/${product.id}`}>{product.name}</Link></p>
+          //                 <p className="text">{product.price}</p>
+     
+          //    </Col>
+        })
+      }
       
-      <Col lg={3} className='card-container'>
-
-      <img src={imageFour} alt="" className='img-fluid rounded mb-3'/>
-                <p className="overlay"><FaPlay /></p>
-                <audio src="#"></audio>
-                    <p className="title"><Link to="/product">Cool Afro</Link></p>
-                     <p className="text">$100</p>
-
-        </Col>
-
-        <Col lg={3} className='card-container'>
-
-      <img src={imageFour} alt="" className='img-fluid rounded mb-3'/>
-                <p className="overlay"><FaPlay /></p>
-                    <p className="title"><Link to="/product">Cool Afro</Link></p>
-                     <p className="text">$100</p>
-
-        </Col>
-
       
     </Row>
   
