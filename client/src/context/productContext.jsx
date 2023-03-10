@@ -1,36 +1,43 @@
-import axios from 'axios'
-import { createContext, useReducer, useState } from 'react'
-import reducer from "../reducer/reducer"
-const ProductContext = createContext();
+import { createContext, useReducer } from 'react';
+
+export const ProductContext = createContext();
 
 const initialState = {
-    cart: [],
-    total: 0,
-    amount: 0
+  cart: {
+    cartItems: localStorage.getItem("cartItems")? JSON.parse(localStorage.getItem("cartItems")) : [],
+  },
+};
+function reducer(state, action) {
+  switch (action.type) {
+    case 'CART_ADD_ITEM':
+      const newItem = action.payload;
+      const existItem = state.cart.cartItems.find((item)=>{
+        item.id === newItem.id
+      });
+      const cartItems = existItem ? [...state.cart.cartItems] : [...state.cart.cartItems, newItem]
+      localStorage.setItem("cartItems", JSON.stringify(cartItems))
+      // const cartItems = existItem ? state.cart.cartItem.map((item)=>{
+      //   item.id === existItem.id ? newItem : item
+      // }): [...state.cart.cartItems, newItem]
+
+      // add to cart
+      return { ...state, cart: { ...state.cart, cartItems } 
+    };
+    case 'CART_REMOVE_ITEM' :{
+      const cartItems = state.cart.cartItems.filter(
+        (item) => item.id !== action.payload.id
+      );
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
+      
+    default:
+      return state;
+  }
 }
 
-const ProductContextProvider =  ({children})=>{
-    const [products, setProducts] = useState([])
-    const [state, dispatch] = useReducer(reducer, initialState)
-    
-
- 
-  const getProducts = async()=>{
-    const res = await axios.get("/api/products")
-      setProducts(res.data);
-  } 
-  
-  const getProduct = async(id)=>{
-   const response = await axios.get(`/api/product/${id}`)
-   const product = response.data 
-   dispatch({type: "FILL_CART", payload: {id, product}})
-  } 
-
-  return (
-    <ProductContext.Provider value={{...state, products, getProducts, getProduct}}>
-        {children}
-    </ProductContext.Provider>
-  )
+export function ProductContextProvider(props) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const value = { state, dispatch };
+  return <ProductContext.Provider value={value}>{props.children} </ProductContext.Provider>;
 }
-
-export {ProductContext, ProductContextProvider}

@@ -6,12 +6,15 @@ import Col from 'react-bootstrap/esm/Col';
 import { Link, useLocation } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import '../../products.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from "axios";
 import SingleProduct from '../../components/store_component/singleProduct';
+import { ProductContext } from '../../context/productContext';
 
 
 function Products() {
+  // const {getProduct} = useContext(ProductContext)
+  // const [productId, setProductId] = useState("")
   const [products, setProducts] = useState([])
 
   const cat = useLocation().search
@@ -27,7 +30,9 @@ function Products() {
     }
   fetchData()  
   }, [cat])
-  console.log(cat)
+  // console.log(cat)
+
+  
     return ( 
         <section className="products">
 <Container>
@@ -72,6 +77,7 @@ function Products() {
 
       {
         products.map((product)=>{
+         
           return <SingleProduct key={product.id} {...product} />
 
           // return <Col lg={3} className='card-container' key={product.id}>

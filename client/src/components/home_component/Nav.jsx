@@ -8,7 +8,8 @@ import { useContext } from "react";
 import { ProductContext } from "../../context/productContext";
 
 function MainNav() {
-  const {total} = useContext(ProductContext)
+  const {state} = useContext(ProductContext)
+  const {cart} = state
   return (
     <Navbar expand="lg" sticky="top" className="nav-style">
       <Container>
@@ -40,7 +41,9 @@ function MainNav() {
             </LinkContainer>
 
             <LinkContainer to="/cart">
-             <Nav.Link><FaShoppingCart /> Cart <span>{total}</span></Nav.Link>
+             <Nav.Link><FaShoppingCart /> Cart 
+             {cart.cartItems.length > 0 && (<span>{cart.cartItems.length}</span>)}
+             </Nav.Link>
             </LinkContainer>
            
           </Nav>
