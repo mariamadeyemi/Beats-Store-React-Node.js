@@ -1,4 +1,5 @@
 const express = require("express");
+const dotenv = require("dotenv")
 const app = express();
 const fileUpload = require('express-fileUpload');
 const bcrypt = require('bcrypt');
@@ -9,7 +10,11 @@ const session = require("express-session");
 const User = require("./models/User");
 const ShoppingSession = require("./models/Shopping-Session");
 const CartItems = require("./models/Cart-Item");
+const generateToken = require("./utils/jwtauth");
 
+
+
+dotenv.config()
 const sess = {
   secret: 'keyboard cat',
   resave: true,
@@ -137,13 +142,19 @@ app.post("/register", async(req, res)=>{
   try {
     let body = req.body
   const saltRounds = 10
-    let user = new User({...body, verify: "N",});
+    let user = new User({...body, verify: "N"});
   bcrypt.hash(req.body.password, saltRounds, async(err, hash)=>{
     user.password = hash;
     await user.save()
   })
 
-  res.status(200)
+  res.status(200).send({
+    id: user.id,
+    firstname: user.first_name,
+    lastname: user.last_name,
+    email: user.email_address,
+    token: generateToken(user)
+  })
   } catch (error) {
     res.status(401).json(error.message)
   }
@@ -153,22 +164,19 @@ app.post("/register", async(req, res)=>{
 app.post("/login", async(req, res)=>{
 
   try {
-  let { email, password } = req.body
-  let user = await User.find([email, email])
+  let { email_address, password } = req.body
+  let user = await conn.execute(`SELECT * FROM users WHERE email_address = ?`, [email_address])
+  let userData = user[0][0]
+  // console.log();
 
-  if(user && bcrypt.compare(password, user.password)){
-    req.session.userId = user.id
-    const {password, ...other} = user
-    let authUser = new ShoppingSession({
-      user_id: user.id,
-      guest_user: "N",
-      uuid: req.session.id
-    })
-    await authUser.save()
-    res.status(200).json(other)
+  if(user && bcrypt.compare(password, userData.password)){
+    req.session.userId = userData.id
+    const {password, ...other} = userData
+
+    res.status(200).json({...other, token: generateToken(userData)})
 
   }else{
-    res.status(404).json("Wrong username or password")
+    res.status(401).json("Wrong username or password")
   }   
   } catch (error) {
     res.status(503).json(error.message)

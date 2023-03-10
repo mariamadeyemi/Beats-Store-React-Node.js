@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -9,13 +10,18 @@ const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
     // const [state, dispatch] = useReducer(authReducer, initialState)
-
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
-  );
+);
 
   const login = async (inputs) => {
     const res = await axios.post("/api/login", inputs);
+    // dispatch({ type: "SETUSER", payload: res.data })
+    setCurrentUser(res.data);
+  };
+
+  const signup = async (inputs) => {
+    const res = await axios.post("/api/register", inputs);
     // dispatch({ type: "SETUSER", payload: res.data })
     setCurrentUser(res.data);
   };
@@ -25,6 +31,8 @@ const AuthContextProvider = ({ children }) => {
     // dispatch({ type: "LOGOUT" })
     setCurrentUser(null);
   };
+
+  
   
 //   useEffect(()=>{
 //     const fetch = async ()=>{
@@ -40,7 +48,7 @@ const AuthContextProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, logout}}>
+    <AuthContext.Provider value={{ currentUser, login, logout, signup}}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,4 +1,3 @@
-import imageFour from '../../assets/store-img/in-da-club.jpg'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
@@ -18,9 +17,9 @@ function Cart() {
         dispatch({type: 'CART_REMOVE_ITEM', payload: item});
     }
 
-    // const checkoutHandler = () => {
-    //     navigate("/signin?redirect=/shipping")
-    // }
+    const checkoutHandler = () => {
+        navigate("/login?redirect=/shipping")
+    }
 
     return ( 
         <section className="cart">
@@ -32,7 +31,7 @@ function Cart() {
     <h1 className="cart-h1">Cart Review</h1> 
 
       <div className="cart-desc"> 
-         <p>1 item:$100.00 <span><FaTimes /> </span> </p> 
+         <p>{cart.cartItems.length} items:${cart.cartItems.reduce((a, c)=> a + c.price * c.quantity, 0)} <span><FaTimes /> </span> </p> 
   </div> 
 
   <div className="items-container">
@@ -70,10 +69,10 @@ function Cart() {
             <div className="summary">
                 <h2>Cart Summary</h2>
                 <div className="cart-summary">
-                    <p> <span>Total Gross</span> <span>$100.00</span> </p>
+                    <p> <span>Total Gross</span> <span>${cart.cartItems.reduce((a, c)=> a + c.price * c.quantity, 0)}</span> </p>
                     <p> <span>Discount</span> <span>-$00.00</span> </p>
-                    <p> <span>Total</span> <span>$100.00</span> </p>
-                    <Button as={Link} to="/" className='summary-btn'>Checkout with Payoneer</Button>
+                    <p> <span>Total</span> <span>${cart.cartItems.reduce((a, c)=> a + c.price * c.quantity, 0)}</span> </p>
+                    <Button type='button' onClick={checkoutHandler} disabled={cart.cartItems.length === 0} className='summary-btn'>Checkout with Payoneer</Button>
                 </div>
             </div>
         </Col>   
